@@ -7,11 +7,11 @@ namespace Kitchen.Data
     {
        
         public  DbSet<Food> Food { get; set; }
-        //public KitchenDbContext()
-        //{
+        public KitchenDbContext()
+        {
 
-        //}
-       public KitchenDbContext(string connectionString):base(connectionString)
+        }
+        public KitchenDbContext(string connectionString):base(connectionString)
         {
           
         }

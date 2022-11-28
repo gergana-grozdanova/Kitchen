@@ -12,15 +12,17 @@ namespace Kitchen.Api.Controllers
     public class FoodController : ApiController
     {
         private readonly IFoodService _foodService;
+       
         public FoodController(IFoodService foodService)
         {
             _foodService = foodService;
         }
+       
         [HttpGet]
-        public string GetAll()
+        public Food[] GetAll()
         {
-            return "ehoooooo";
-            //    return _foodService.GetAll();
+        
+            return _foodService.GetAll().ToArray();
         }
         [HttpGet]
         public Food GetById(string id)
@@ -37,8 +39,17 @@ namespace Kitchen.Api.Controllers
         [HttpPost]
         public Food Create(Food food)
         {
-
-            var created = _foodService.Create(food);
+            var created = new Food();
+            try
+            {
+           created = _foodService.Create(food);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+            
             return created;
         }
 
