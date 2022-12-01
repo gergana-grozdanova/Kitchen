@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ValidationFramework;
 
-namespace Kitchen.Data.Entities
+namespace Kitchen.Services.Dtos
 {
-    public  class Food:BaseEntity
+  public  class FoodDto:BaseDto
     {
-        //[ValidNameLength]
-       // [ValidFoodName]
         public string Name { get; set; }
         public DateTime CookingTime { get; set; }
         public string Level { get; set; }

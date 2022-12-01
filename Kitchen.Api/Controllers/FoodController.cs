@@ -1,10 +1,12 @@
 ﻿using Kitchen.Data.Entities;
 using Kitchen.Services.Abstraction;
+using Kitchen.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Kitchen.Api.Controllers
@@ -19,15 +21,15 @@ namespace Kitchen.Api.Controllers
         }
        
         [HttpGet]
-        public Food[] GetAll()
+        public async  Task<IEnumerable<FoodDto>> GetAll()
         {
         
-            return _foodService.GetAll().ToArray();
+            return await _foodService.GetAll();
         }
         [HttpGet]
-        public Food GetById(string id)
+        public async Task<FoodDto> GetById(string id)
         {
-            var food = _foodService.GetById(id);
+            var food = await _foodService.GetById(id);
             if (food == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -36,21 +38,14 @@ namespace Kitchen.Api.Controllers
             return food;
         }
 
+       
+
         [HttpPost]
-        public Food Create(Food food)
+        public async  Task<FoodDto> Create(Food food)
         {
-            var created = new Food();
-            try
-            {
-           created = _foodService.Create(food);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-            
-            return created;
+           
+          return await _foodService.Create(food);
+          
         }
 
         [HttpDelete]
@@ -59,11 +54,11 @@ namespace Kitchen.Api.Controllers
             _foodService.Delete(id);
 
         }
-        [HttpPost]
-        public IEnumerable<Food> Search(string name)
-        {
-            return _foodService.GetFoodByName(name);
-        }
+        //[HttpPost]
+        //public IEnumerable<FoodDto> Search(string name)
+        //{
+        //    return  _foodService.GetFoodByName(name);
+        //}
         //public HttpResponseMessage GetFood([FromUri] SearchCriteriaModel crit)
         //{
         //// Validate and clean crit object

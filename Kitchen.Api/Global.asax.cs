@@ -17,6 +17,8 @@ using System.Reflection;
 using Autofac.Integration.WebApi;
 using Autofac.Integration.Mvc;
 using Kitchen.Data;
+using Kitchen.Data.Repositories.Food;
+using AutoMapper;
 
 namespace Kitchen.Api
 {
@@ -40,7 +42,7 @@ namespace Kitchen.Api
             
 
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -50,8 +52,14 @@ namespace Kitchen.Api
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterType<KitchenDbContext>().InstancePerLifetimeScope();
-    
+            builder.RegisterType<FoodRepository>().As<IFoodRepository>().InstancePerLifetimeScope();
             builder.RegisterType<FoodService>().As<IFoodService>().InstancePerLifetimeScope();
+
+
+            //MapperConfiguration config = AutoMapperConfig.Configure();
+            //IMapper mapper = config.CreateMapper();
+            //builder.Register(ctx=>ctx.InjectProperties(mapper));
+
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

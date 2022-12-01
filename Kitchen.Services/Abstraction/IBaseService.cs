@@ -1,4 +1,5 @@
 ﻿using Kitchen.Data.Entities;
+using Kitchen.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Services.Abstraction
 {
-    public interface IBaseService<TEntity> where TEntity:BaseEntity
+    public interface IBaseService<TEntity,TDto> where TEntity:BaseEntity where TDto:BaseDto
     {
-         TEntity Create(TEntity entity);
-         TEntity Update(TEntity entity);
-         void Delete(string id);
-         TEntity GetById(string id);
-         List<TEntity> GetAll();
+          Task<TDto> Create(TEntity entity);
+
+         Task<TDto> Update(TEntity entity);
+
+         Task Delete(string id);
+
+         Task<TDto> GetById(string id);
+
+         Task<IEnumerable<TDto>> GetAll();
     }
 }

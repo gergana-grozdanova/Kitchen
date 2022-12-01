@@ -1,5 +1,8 @@
-﻿using Kitchen.Services;
+﻿using Kitchen.Data;
+using Kitchen.Services;
+using Kitchen.Services.Abstraction;
 using System;
+using Kitchen.Data.Entities;
 
 namespace Kitchen.Console
 {
@@ -7,8 +10,12 @@ namespace Kitchen.Console
     {
         static void Main(string[] args)
         {
-           // FoodService service = new FoodService();
 
+           // IFoodService service = new FoodService(new KitchenDbContext("Server=GERGANAG17;Database=Kitchen;Trusted_Connection=True;TrustServerCertificate=True"));
+           // var food = new Food();
+           // food.Name = "aaaaaa";
+           //var created= service.Create(food).GetAwaiter().GetResult();
+           // System.Console.WriteLine(created.Id);
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using Kitchen.Data;
+﻿using AutoMapper;
+using Kitchen.Data;
 using Kitchen.Data.Entities;
+using Kitchen.Data.Repositories;
 using Kitchen.Services.Abstraction;
+using Kitchen.Services.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,50 +13,44 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Services
 {
-    public class BaseService<TEntity>:IBaseService<TEntity> where TEntity:BaseEntity
+    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto> 
+        where TEntity:BaseEntity
+        where TDto:BaseDto
     {
-        protected readonly KitchenDbContext _dbContext;
-        protected readonly DbSet<TEntity> entities;
-        protected BaseService(KitchenDbContext dbContext)
-        {
-            _dbContext = dbContext;
-            entities = dbContext.Set<TEntity>();
-        }
-        public TEntity Create(TEntity entity)
-        {
-             entities.Add(entity);
-             _dbContext.SaveChanges();
+        protected readonly IBaseRepository<TEntity> _baseRepository;
+        protected readonly IMapper _mapper;
 
-            return entity;
+        public BaseService(IBaseRepository<TEntity> baseRepository, IMapper mapper)
+        {
+            _baseRepository = baseRepository;
+            _mapper = mapper;
         }
 
-        public void Delete(string id)
+        public async Task<TDto> Create(TEntity entity)
         {
-            TEntity entity =  entities.FirstOrDefault(e => e.Id == id);
-            if (entity != null)
-            {
-            entities.Remove(entity);
-            _dbContext.SaveChanges();
-            }
+          return  _mapper.Map<TDto>(await _baseRepository.Create(entity));
         }
 
-        public List<TEntity> GetAll()
+        public async Task Delete(string id)
         {
-            return entities.ToList();
+            await _baseRepository.Delete(id);
         }
 
-        public TEntity GetById(string id)
+        public async Task<IEnumerable<TDto>> GetAll()
         {
-            return entities
-                .FirstOrDefault(e => e.Id == id);
+            var all = await _baseRepository.GetAll();
+            return all.Select(e=>(_mapper.Map<TDto>(e) ));
         }
 
-        public TEntity Update(TEntity entity)
+       
+        public async Task<TDto> GetById(string id)
         {
-            var oldEntity = entities.Find(entity.Id);          
-            _dbContext.Entry(oldEntity).CurrentValues.SetValues(entity);
-            _dbContext.SaveChanges();
-            return entity;
+            return _mapper.Map<TDto>(await _baseRepository.GetById(id));
+        }
+
+        public async Task<TDto> Update(TEntity entity)
+        {
+            return _mapper.Map<TDto>(await _baseRepository.Update(entity));
         }
     }
 }
