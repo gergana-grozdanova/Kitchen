@@ -19,6 +19,8 @@ using Autofac.Integration.Mvc;
 using Kitchen.Data;
 using Kitchen.Data.Repositories.Food;
 using AutoMapper;
+using System.Data.Entity;
+using Kitchen.Data.Repositories;
 
 namespace Kitchen.Api
 {
@@ -51,14 +53,16 @@ namespace Kitchen.Api
 
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterType<KitchenDbContext>().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>));
+            //builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(ibase<>));
+            builder.RegisterType<KitchenDbContext>().As<DbContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<FoodRepository>().As<IFoodRepository>().InstancePerLifetimeScope();
             builder.RegisterType<FoodService>().As<IFoodService>().InstancePerLifetimeScope();
 
 
-            //MapperConfiguration config = AutoMapperConfig.Configure();
-            //IMapper mapper = config.CreateMapper();
-            //builder.Register(ctx=>ctx.InjectProperties(mapper));
+            MapperConfiguration config = AutoMapperConfig.Configure();
+            IMapper mapper = config.CreateMapper();
+            builder.Register(ctx => ctx.InjectProperties(mapper));
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

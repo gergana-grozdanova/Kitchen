@@ -13,7 +13,7 @@ namespace Kitchen.Data.Repositories
     {
         protected readonly KitchenDbContext _dbContext;
         protected readonly DbSet<TEntity> entities;
-        protected BaseRepository(KitchenDbContext dbContext)
+        public  BaseRepository(KitchenDbContext dbContext)
         {
             _dbContext = dbContext;
             entities = dbContext.Set<TEntity>();

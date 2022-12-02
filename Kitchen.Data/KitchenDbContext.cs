@@ -15,5 +15,10 @@ namespace Kitchen.Data
         {
           
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<KitchenDbContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

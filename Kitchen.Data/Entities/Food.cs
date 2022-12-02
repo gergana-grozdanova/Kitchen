@@ -12,7 +12,6 @@ namespace Kitchen.Data.Entities
         //[ValidNameLength]
        // [ValidFoodName]
         public string Name { get; set; }
-        public DateTime CookingTime { get; set; }
         public string Level { get; set; }
     }
 }
