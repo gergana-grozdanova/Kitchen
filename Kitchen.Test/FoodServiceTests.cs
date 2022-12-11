@@ -16,7 +16,7 @@ namespace Kitchen.Test
     public class FoodServiceTests
     {
         [TestMethod]
-        public void GetAll_Returns_TheCorrect_NumberFood()
+        public async void GetAll_Returns_TheCorrect_NumberFood()
         {
             var myProfile = new MapperProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
@@ -30,16 +30,16 @@ namespace Kitchen.Test
 
             FoodService service = new FoodService(mockRepo.Object,mapper);
 
-            var actualResult= service.GetAll().GetAwaiter().GetResult().Count();
+            var actualResult=await service.GetAll();
             var expectedResult = 2;
-            Assert.AreEqual(expectedResult, actualResult);
+            Assert.AreEqual(expectedResult, actualResult.Count());
 
 
 
         }
 
         [TestMethod]
-        public void GetById_Returns_TheCorrect_Food()
+        public async void GetById_Returns_TheCorrect_Food()
         {
             var myProfile = new MapperProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
@@ -51,9 +51,9 @@ namespace Kitchen.Test
 
             FoodService service = new FoodService(mockRepo.Object, mapper);
 
-            var actualResult = service.GetById("test12345").GetAwaiter().GetResult().Name;
+            var actualResult =await  service.GetById("test12345");
             var expectedResult = "Test";
-            Assert.AreEqual(expectedResult, actualResult);
+            Assert.AreEqual(expectedResult, actualResult.Name);
 
 
 
