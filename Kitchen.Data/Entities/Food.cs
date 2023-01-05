@@ -11,7 +11,7 @@ namespace Kitchen.Data.Entities
     {
         //[ValidNameLength]
        // [ValidFoodName]
-        public string Name { get; set; }
-        public string Level { get; set; }
+        public virtual  string Name { get; set; }
+        public virtual string Level { get; set; }
     }
 }

@@ -21,6 +21,8 @@ using Kitchen.Data.Repositories.Food;
 using AutoMapper;
 using System.Data.Entity;
 using Kitchen.Data.Repositories;
+using NHibernate.Cfg;
+using Kitchen.Data.Config;
 
 namespace Kitchen.Api
 {
@@ -49,14 +51,11 @@ namespace Kitchen.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            
-
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>));
-            //builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(ibase<>));
+            builder.RegisterGeneric(typeof(BaseRepositoryNHibernate<>)).As(typeof(IBaseRepository<>));
             builder.RegisterType<KitchenDbContext>().As<DbContext>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<FoodRepository>().As<IFoodRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FoodRepositoryNHibernate>().As<IFoodRepository>().InstancePerLifetimeScope();
             builder.RegisterType<FoodService>().As<IFoodService>().InstancePerLifetimeScope();
 
 

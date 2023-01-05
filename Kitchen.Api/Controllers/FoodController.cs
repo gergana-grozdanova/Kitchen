@@ -48,10 +48,10 @@ namespace Kitchen.Api.Controllers
           
         }
 
-        [HttpDelete]
-        public void Delete(string id)
+        [HttpPost]
+        public async Task Delete(string id)
         {
-            _foodService.Delete(id);
+           await _foodService.Delete(id);
 
         }
         //[HttpPost]

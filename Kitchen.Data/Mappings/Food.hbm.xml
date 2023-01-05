@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Kitchen.Data"
+    namespace="Kitchen.Data.Entities">
+
+	<class name="Food" table="FOODS">
+		<id name="Id" type="String"></id>
+		<property name="Name" type="String"/>
+		<property name="Level" type="String"/>
+	</class>
+
+</hibernate-mapping>

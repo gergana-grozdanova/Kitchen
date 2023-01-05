@@ -5,8 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Mappings\Food.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Food.hbm.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="GG.ValidationFramework" Version="3.0.0" />
+    <PackageReference Include="NHibernate" Version="5.4.0" />
+    <PackageReference Include="NHibernateProfiler.Appender" Version="6.0.6037" />
   </ItemGroup>
 
 </Project>
