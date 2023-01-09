@@ -18,22 +18,28 @@ namespace Kitchen.Data.Repositories
             _dbContext = dbContext;
             entities = dbContext.Set<TEntity>();
         }
-        public async Task<TEntity> Create(TEntity entity)
+        public void Create(TEntity entity)
         {
             entities.Add(entity);
-            await _dbContext.SaveChangesAsync();
-
-            return entity;
+            
         }
 
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
-            TEntity entity = await entities.FirstOrDefaultAsync(e => e.Id == id);
+            TEntity entity =  entities.FirstOrDefault(e => e.Id == id);
             if (entity != null)
             {
-                entities.Remove(entity);
-                _dbContext.SaveChanges();
+                entities.Remove(entity);              
             }
+        }
+
+        public virtual void Delete(TEntity entityToDelete)
+        {
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                entities.Attach(entityToDelete);
+            }
+            entities.Remove(entityToDelete);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
@@ -46,12 +52,20 @@ namespace Kitchen.Data.Repositories
             return await entities.FirstOrDefaultAsync(e=>e.Id==id);
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public void Save()
         {
-            var oldEntity = await entities.FindAsync(entity.Id);
+            _dbContext.SaveChanges();
+        }
+
+        public void Update(TEntity entity)
+        {
+            var oldEntity =  entities.FirstOrDefault(e=>e.Id==entity.Id);
             _dbContext.Entry(oldEntity).CurrentValues.SetValues(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+        }
+
+        public void Dispose()
+        {
+            _dbContext.Dispose();
         }
     }
 }

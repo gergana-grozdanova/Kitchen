@@ -41,18 +41,23 @@ namespace Kitchen.Api.Controllers
        
 
         [HttpPost]
-        public async  Task<FoodDto> Create(Food food)
+        public void Create(Food food)
         {
            
-          return await _foodService.Create(food);
+          _foodService.Create(food);
           
         }
 
         [HttpPost]
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
-           await _foodService.Delete(id);
+            _foodService.Delete(id);
 
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
         //[HttpPost]
         //public IEnumerable<FoodDto> Search(string name)

@@ -17,26 +17,41 @@ namespace Kitchen.Data.Repositories
         {
             _sessionFactory = NHibernateConfiguration.Configure().BuildSessionFactory()
 ;        }
-        public async Task<TEntity> Create(TEntity entity)
+        public void Create(TEntity entity)
         {
             using(var session = _sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
-               await session.SaveAsync(entity);
-                tx.Commit();
-                return entity;
+                session.Save(entity);
+                tx.Commit();             
             }
         }
 
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
             using (var session = _sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
                 var obj = session.Load<TEntity>(id);
-                await session.DeleteAsync(obj);               
+                 session.Delete(obj);               
                 
             }
+        }
+
+        public void Delete(TEntity entityToDelete)
+        {
+            using (var session = _sessionFactory.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                session.Delete(entityToDelete);
+
+            }
+        }
+
+        public void Dispose()
+        {
+//In general NHibernate won't keep open connection to DB longer then it needs to. It uses SQL Server connection pool to get connections quickly and return them. So in terms of open connection its not a problem not to dispose a session.
+//But session also keeps track of all changes in entities and flushes them in DB on dispose / commit transaction
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
@@ -58,13 +73,22 @@ namespace Kitchen.Data.Repositories
             }
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public void Save()
+        {
+            //using (var session = _sessionFactory.OpenSession())
+            //using (var tx = session.BeginTransaction())
+            //{
+
+            //    tx.Commit();
+            //}
+        }
+
+        public void Update(TEntity entity)
         {
             using (var session = _sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
-                await session.UpdateAsync(entity);
-                return entity;
+                 session.Update(entity);
 
             }
         }

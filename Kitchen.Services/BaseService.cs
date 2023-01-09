@@ -13,9 +13,10 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Services
 {
-    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto> 
+    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto>,IDisposable
         where TEntity:BaseEntity
         where TDto:BaseDto
+        
     {
         protected readonly IBaseRepository<TEntity> _baseRepository;
         protected readonly IMapper _mapper;
@@ -26,14 +27,16 @@ namespace Kitchen.Services
             _mapper = mapper;
         }
 
-        public async Task<TDto> Create(TEntity entity)
+        public void Create(TEntity entity)
         {
-          return  _mapper.Map<TDto>(await _baseRepository.Create(entity));
+            _baseRepository.Create(entity);
+            _baseRepository.Save();
         }
 
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
-            await _baseRepository.Delete(id);
+             _baseRepository.Delete(id);
+            _baseRepository.Save();
         }
 
         public async Task<IEnumerable<TDto>> GetAll()
@@ -48,9 +51,29 @@ namespace Kitchen.Services
             return _mapper.Map<TDto>(await _baseRepository.GetById(id));
         }
 
-        public async Task<TDto> Update(TEntity entity)
+        public void Update(TEntity entity)
         {
-            return _mapper.Map<TDto>(await _baseRepository.Update(entity));
+            _baseRepository.Update(entity);
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _baseRepository.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

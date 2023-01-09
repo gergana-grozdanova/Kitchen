@@ -10,14 +10,15 @@ namespace Kitchen.Services.Abstraction
 {
     public interface IBaseService<TEntity,TDto> where TEntity:BaseEntity where TDto:BaseDto
     {
-          Task<TDto> Create(TEntity entity);
+        void Create(TEntity entity);
 
-         Task<TDto> Update(TEntity entity);
+        void Update(TEntity entity);
 
-         Task Delete(string id);
+        void Delete(string id);
 
          Task<TDto> GetById(string id);
 
          Task<IEnumerable<TDto>> GetAll();
+         void Dispose();
     }
 }
