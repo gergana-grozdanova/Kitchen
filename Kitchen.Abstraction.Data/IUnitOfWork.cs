@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kitchen.Data.Repositories.Food
+namespace Kitchen.Abstraction.Data
 {
-  public   interface IFoodRepository:IBaseRepository<Entities.Food>
+  public  interface IUnitOfWork
     {
+        void Save();
+        void RollBack();
     }
 }

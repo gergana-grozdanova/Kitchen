@@ -3,15 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.Data", "Kitchen.Data\Kitchen.Data.csproj", "{7DE49299-53D0-4B5B-B5EE-E390676462CD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.Services", "Kitchen.Services\Kitchen.Services.csproj", "{CABD47AB-E9AC-41B7-A41B-8F7954B693C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398} = {008FF738-BE16-42A5-98AF-1A21D4A4D398}
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F} = {29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.Api", "Kitchen.Api\Kitchen.Api.csproj", "{EBE060B8-D99D-420E-8555-04D8931837A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.Console", "Kitchen.Console\Kitchen.Console.csproj", "{3A1636EA-4B0B-451D-A1C2-33CB278AFFDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.Console", "Kitchen.Console\Kitchen.Console.csproj", "{3A1636EA-4B0B-451D-A1C2-33CB278AFFDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.Test", "Kitchen.Test\Kitchen.Test.csproj", "{5AFF3C42-C87D-4E66-9900-2922590F1ECE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F} = {29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.NHibernate.Data", "Kitchen.NHibernate.Data\Kitchen.NHibernate.Data.csproj", "{A50826F8-30A6-46F7-9507-66C25AA9A626}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.Abstraction.Data", "Kitchen.Abstraction.Data\Kitchen.Abstraction.Data.csproj", "{008FF738-BE16-42A5-98AF-1A21D4A4D398}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{58760AB5-3921-48A0-98E5-6B180413CA3F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.EF.Data", "Kitchen.EF.Data\Kitchen.EF.Data.csproj", "{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.Models", "Kitchen.Models\Kitchen.Models.csproj", "{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.UoW", "Kitchen.UoW\Kitchen.UoW.csproj", "{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +36,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DE49299-53D0-4B5B-B5EE-E390676462CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DE49299-53D0-4B5B-B5EE-E390676462CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DE49299-53D0-4B5B-B5EE-E390676462CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DE49299-53D0-4B5B-B5EE-E390676462CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CABD47AB-E9AC-41B7-A41B-8F7954B693C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CABD47AB-E9AC-41B7-A41B-8F7954B693C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABD47AB-E9AC-41B7-A41B-8F7954B693C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,12 +52,39 @@ Global
 		{5AFF3C42-C87D-4E66-9900-2922590F1ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AFF3C42-C87D-4E66-9900-2922590F1ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AFF3C42-C87D-4E66-9900-2922590F1ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A50826F8-30A6-46F7-9507-66C25AA9A626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A50826F8-30A6-46F7-9507-66C25AA9A626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A50826F8-30A6-46F7-9507-66C25AA9A626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A50826F8-30A6-46F7-9507-66C25AA9A626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A50826F8-30A6-46F7-9507-66C25AA9A626} = {58760AB5-3921-48A0-98E5-6B180413CA3F}
+		{008FF738-BE16-42A5-98AF-1A21D4A4D398} = {58760AB5-3921-48A0-98E5-6B180413CA3F}
+		{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37} = {58760AB5-3921-48A0-98E5-6B180413CA3F}
+		{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F} = {58760AB5-3921-48A0-98E5-6B180413CA3F}
+		{57DA6E9B-7D01-44AB-86CC-2A484F7F5FF0} = {58760AB5-3921-48A0-98E5-6B180413CA3F}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FE739A49-6FF7-40DD-A68C-6B6A195B9724}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {FE739A49-6FF7-40DD-A68C-6B6A195B9724}
 	EndGlobalSection
 EndGlobal

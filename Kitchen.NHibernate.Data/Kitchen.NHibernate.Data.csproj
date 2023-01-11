@@ -13,10 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
-    <PackageReference Include="GG.ValidationFramework" Version="3.0.0" />
-    <PackageReference Include="NHibernate" Version="5.4.0" />
+    <PackageReference Include="FluentNHibernate" Version="3.1.0" />
     <PackageReference Include="NHibernateProfiler.Appender" Version="6.0.6037" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.Abstraction.Data\Kitchen.Abstraction.Data.csproj" />
   </ItemGroup>
 
 </Project>

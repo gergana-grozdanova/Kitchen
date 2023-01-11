@@ -16,13 +16,12 @@ using Autofac;
 using System.Reflection;
 using Autofac.Integration.WebApi;
 using Autofac.Integration.Mvc;
-using Kitchen.Data;
-using Kitchen.Data.Repositories.Food;
 using AutoMapper;
 using System.Data.Entity;
-using Kitchen.Data.Repositories;
 using NHibernate.Cfg;
-using Kitchen.Data.Config;
+using Kitchen.NHibernate.Data.Repositories;
+using Kitchen.Abstraction.Data;
+using Kitchen.EF.Data;
 
 namespace Kitchen.Api
 {

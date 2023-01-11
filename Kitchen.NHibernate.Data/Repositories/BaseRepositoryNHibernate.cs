@@ -1,14 +1,16 @@
-﻿using Kitchen.Data.Config;
-using Kitchen.Data.Entities;
+﻿using Kitchen.Abstraction.Data;
+using Kitchen.Models;
+using Kitchen.NHibernate.Data.Config;
 using NHibernate;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kitchen.Data.Repositories
+namespace Kitchen.NHibernate.Data.Repositories
 {
    public class BaseRepositoryNHibernate<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
@@ -54,12 +56,13 @@ namespace Kitchen.Data.Repositories
 //But session also keeps track of all changes in entities and flushes them in DB on dispose / commit transaction
         }
 
-        public async Task<IEnumerable<TEntity>> GetAll()
+
+        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression)
         {
             using (var session = _sessionFactory.OpenSession())
             using (var tx = session.BeginTransaction())
             {
-             return await session.Query<TEntity>().ToListAsync();            
+                return await session.Query<TEntity>().Where(expression).ToListAsync();
             }
         }
 

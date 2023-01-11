@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Kitchen.Data;
-using Kitchen.Data.Entities;
-using Kitchen.Data.Repositories;
+using Kitchen.Abstraction.Data;
+using Kitchen.Models;
 using Kitchen.Services.Abstraction;
 using Kitchen.Services.Dtos;
 using System.Collections.Generic;

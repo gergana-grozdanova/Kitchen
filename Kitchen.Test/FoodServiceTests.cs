@@ -1,14 +1,13 @@
 ﻿using Kitchen.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using Kitchen.Data.Repositories.Food;
 using AutoMapper;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Kitchen.Services.Dtos;
-using Kitchen.Data.Entities;
+using Kitchen.Abstraction.Data;
+using Kitchen.Models;
 
 namespace Kitchen.Test
 {
@@ -26,11 +25,11 @@ namespace Kitchen.Test
             var food = new List<Food> ();
             food.Add(new Food());
             food.Add(new Food());
-            mockRepo.Setup(x => x.GetAll()).ReturnsAsync(food);
+            mockRepo.Setup(x => x.GetAll(y=>y==y)).ReturnsAsync(food);
 
             FoodService service = new FoodService(mockRepo.Object,mapper);
 
-            var actualResult=await service.GetAll();
+            var actualResult=await service.GetAll(y => y == y);
             var expectedResult = 2;
             Assert.AreEqual(expectedResult, actualResult.Count());
 

@@ -324,9 +324,21 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kitchen.Data\Kitchen.Data.csproj">
-      <Project>{7DE49299-53D0-4B5B-B5EE-E390676462CD}</Project>
-      <Name>Kitchen.Data</Name>
+    <ProjectReference Include="..\Kitchen.Abstraction.Data\Kitchen.Abstraction.Data.csproj">
+      <Project>{008FF738-BE16-42A5-98AF-1A21D4A4D398}</Project>
+      <Name>Kitchen.Abstraction.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kitchen.EF.Data\Kitchen.EF.Data.csproj">
+      <Project>{B1546AC6-9E21-4DDB-98BF-D34FF61D7F37}</Project>
+      <Name>Kitchen.EF.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kitchen.Models\Kitchen.Models.csproj">
+      <Project>{29AD1E7B-8247-4BF8-B317-EABCE89ACD1F}</Project>
+      <Name>Kitchen.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kitchen.NHibernate.Data\Kitchen.NHibernate.Data.csproj">
+      <Project>{A50826F8-30A6-46F7-9507-66C25AA9A626}</Project>
+      <Name>Kitchen.NHibernate.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kitchen.Services\Kitchen.Services.csproj">
       <Project>{CABD47AB-E9AC-41B7-A41B-8F7954B693C8}</Project>

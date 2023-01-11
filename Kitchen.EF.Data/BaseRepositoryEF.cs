@@ -1,4 +1,5 @@
-﻿using Kitchen.Data.Entities;
+﻿using Kitchen.Abstraction.Data;
+using Kitchen.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,13 +8,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kitchen.Data.Repositories
+namespace Kitchen.EF.Data.Repositories
 {
-   public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+   public class BaseRepositoryEF<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly KitchenDbContext _dbContext;
         protected readonly DbSet<TEntity> entities;
-        public  BaseRepository(KitchenDbContext dbContext)
+        public  BaseRepositoryEF(KitchenDbContext dbContext)
         {
             _dbContext = dbContext;
             entities = dbContext.Set<TEntity>();
@@ -40,12 +41,7 @@ namespace Kitchen.Data.Repositories
                 entities.Attach(entityToDelete);
             }
             entities.Remove(entityToDelete);
-        }
-
-        public async Task<IEnumerable<TEntity>> GetAll()
-        {
-            return await entities.ToListAsync();
-        }
+        }      
 
         public async Task<TEntity> GetById(string id)
         {
@@ -66,6 +62,11 @@ namespace Kitchen.Data.Repositories
         public void Dispose()
         {
             _dbContext.Dispose();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity,bool>> expression)
+        {
+            return await entities.Where(expression).ToListAsync();
         }
     }
 }

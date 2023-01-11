@@ -1,8 +1,6 @@
-﻿using Kitchen.Data;
-using Kitchen.Services;
+﻿using Kitchen.Services;
 using Kitchen.Services.Abstraction;
 using System;
-using Kitchen.Data.Entities;
 
 namespace Kitchen.Console
 {

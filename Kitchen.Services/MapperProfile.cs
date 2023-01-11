@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Kitchen.Data.Entities;
+using Kitchen.Models;
 using Kitchen.Services.Dtos;
 using System;
 using System.Collections.Generic;

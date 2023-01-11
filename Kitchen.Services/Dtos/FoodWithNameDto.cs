@@ -1,4 +1,4 @@
-﻿using Kitchen.Data.Entities;
+﻿using Kitchen.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

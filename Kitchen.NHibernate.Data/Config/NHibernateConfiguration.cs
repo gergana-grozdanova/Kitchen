@@ -1,5 +1,4 @@
 ﻿using HibernatingRhinos.Profiler.Appender.NHibernate;
-using Kitchen.Data.Entities;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kitchen.Data.Config
+namespace Kitchen.NHibernate.Data.Config
 {
  public static class NHibernateConfiguration
     {
@@ -25,7 +24,7 @@ namespace Kitchen.Data.Config
                 x.LogSqlInConsole = true;
             });
 
-            cfg.AddAssembly("Kitchen.Data");
+            cfg.AddAssembly("Kitchen.NHibernate.Data");
             //cfg.ClassMappings.Add(Food);
             //cfg.AddClass(typeof(Food));
             //cfg.AddFile("Food.hbm.xml");

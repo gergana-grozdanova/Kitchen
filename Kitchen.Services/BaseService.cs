@@ -1,25 +1,27 @@
 ﻿using AutoMapper;
-using Kitchen.Data;
-using Kitchen.Data.Entities;
-using Kitchen.Data.Repositories;
+using Kitchen.Abstraction.Data;
+using Kitchen.Models;
 using Kitchen.Services.Abstraction;
 using Kitchen.Services.Dtos;
+using Kitchen.UoW;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Kitchen.Services
 {
-    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto>,IDisposable
+    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto>
         where TEntity:BaseEntity
         where TDto:BaseDto
         
     {
         protected readonly IBaseRepository<TEntity> _baseRepository;
         protected readonly IMapper _mapper;
+        private IUnitOfWork unitOfWork;
 
         public BaseService(IBaseRepository<TEntity> baseRepository, IMapper mapper)
         {
@@ -30,30 +32,27 @@ namespace Kitchen.Services
         public void Create(TEntity entity)
         {
             _baseRepository.Create(entity);
-            _baseRepository.Save();
+            unitOfWork.Save();
         }
 
         public void Delete(string id)
         {
-             _baseRepository.Delete(id);
-            _baseRepository.Save();
+            _baseRepository.Delete(id);
+            unitOfWork.Save();
         }
 
-        public async Task<IEnumerable<TDto>> GetAll()
-        {
-            var all = await _baseRepository.GetAll();
-            return all.Select(e=>(_mapper.Map<TDto>(e) ));
-        }
-
+      
        
         public async Task<TDto> GetById(string id)
         {
             return _mapper.Map<TDto>(await _baseRepository.GetById(id));
         }
 
-        public void Update(TEntity entity)
+        public async void Update(TEntity entity)
         {
-            _baseRepository.Update(entity);
+            var ent = await _baseRepository.GetById(entity.Id);
+            ent = entity;
+            unitOfWork.Save();
         }
 
         private bool disposed = false;
@@ -64,7 +63,7 @@ namespace Kitchen.Services
             {
                 if (disposing)
                 {
-                    _baseRepository.Dispose();
+                    unitOfWork.RollBack();
                 }
             }
             this.disposed = true;
@@ -74,6 +73,12 @@ namespace Kitchen.Services
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public async Task<IEnumerable<TDto>> GetAll(Expression<Func<TEntity, bool>> expression)
+        {
+            var all = await _baseRepository.GetAll(expression);
+            return all.Select(e => (_mapper.Map<TDto>(e)));
         }
     }
 }

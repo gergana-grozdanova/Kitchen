@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="5.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.EF.Data\Kitchen.EF.Data.csproj" />
+    <ProjectReference Include="..\Kitchen.Models\Kitchen.Models.csproj" />
+    <ProjectReference Include="..\Kitchen.NHibernate.Data\Kitchen.NHibernate.Data.csproj" />
+  </ItemGroup>
+
+</Project>

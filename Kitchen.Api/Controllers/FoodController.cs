@@ -1,4 +1,4 @@
-﻿using Kitchen.Data.Entities;
+﻿using Kitchen.Models;
 using Kitchen.Services.Abstraction;
 using Kitchen.Services.Dtos;
 using System;
@@ -24,7 +24,7 @@ namespace Kitchen.Api.Controllers
         public async  Task<IEnumerable<FoodDto>> GetAll()
         {
         
-            return await _foodService.GetAll();
+            return await _foodService.GetAll(x=>x==x);
         }
         [HttpGet]
         public async Task<FoodDto> GetById(string id)

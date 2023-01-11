@@ -1,7 +1,7 @@
-﻿using Kitchen.Data.Entities;
+﻿using Kitchen.Models;
 using System.Data.Entity;
 
-namespace Kitchen.Data
+namespace Kitchen.EF.Data
 {
     public class KitchenDbContext:DbContext
     {
