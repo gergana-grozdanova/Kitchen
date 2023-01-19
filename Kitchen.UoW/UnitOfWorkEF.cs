@@ -1,4 +1,5 @@
-﻿using Kitchen.EF.Data;
+﻿using Kitchen.Abstraction.Data;
+using Kitchen.EF.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

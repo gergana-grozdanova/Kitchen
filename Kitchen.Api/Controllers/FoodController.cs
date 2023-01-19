@@ -40,7 +40,7 @@ namespace Kitchen.Api.Controllers
 
        
 
-        [HttpPost]
+        [HttpPost]     
         public void Create(Food food)
         {
            
@@ -54,6 +54,19 @@ namespace Kitchen.Api.Controllers
             _foodService.Delete(id);
 
         }
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    filterContext.ExceptionHandled = true;
+         
+        //    _logger.Error(filterContext.Exception);
+
+        //    filterContext.Result = RedirectToAction("Index", "ErrorHandler");
+           
+        //    filterContext.Result = new ViewResult
+        //    {
+        //        ViewName = "~/Views/ErrorHandler/Index.cshtml"
+        //    };
+        //}
 
         protected override void Dispose(bool disposing)
         {

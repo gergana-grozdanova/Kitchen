@@ -1,4 +1,5 @@
-﻿using Kitchen.NHibernate.Data.Config;
+﻿using Kitchen.Abstraction.Data;
+using Kitchen.NHibernate.Data.Config;
 using NHibernate;
 using System;
 using System.Collections.Generic;

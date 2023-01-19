@@ -50,6 +50,9 @@ namespace Kitchen.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            //var exceptionLogger = new ValidModelStateFilter();
+            //GlobalConfiguration.Configuration.Filters.Add(exceptionLogger);
+
             var builder = new ContainerBuilder();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             builder.RegisterGeneric(typeof(BaseRepositoryNHibernate<>)).As(typeof(IBaseRepository<>));
