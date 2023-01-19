@@ -59,8 +59,8 @@ namespace Kitchen.Api
             builder.RegisterGeneric(typeof(BaseRepositoryNHibernate<>)).As(typeof(IBaseRepository<>));
             builder.RegisterType<KitchenDbContext>().As<DbContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<FoodRepositoryNHibernate>().As<IFoodRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<ExceptionLoggingFoodService>().As<IFoodService>().InstancePerLifetimeScope();
-
+            builder.RegisterType<FoodService>().As<IFoodService>().InstancePerLifetimeScope();
+            builder.RegisterDecorator<ExceptionLoggingFoodService, IFoodService>();
 
             MapperConfiguration config = AutoMapperConfig.Configure();
             IMapper mapper = config.CreateMapper();
