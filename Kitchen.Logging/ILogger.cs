@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Logging
 {
-    interface ILogger
+   public interface ILogger
     {
         Task LogException(Exception ex);
         Task LogMessage(string message);

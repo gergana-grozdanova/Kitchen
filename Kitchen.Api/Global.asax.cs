@@ -22,6 +22,7 @@ using NHibernate.Cfg;
 using Kitchen.NHibernate.Data.Repositories;
 using Kitchen.Abstraction.Data;
 using Kitchen.EF.Data;
+using Kitchen.Services.Decorators;
 
 namespace Kitchen.Api
 {
@@ -58,7 +59,7 @@ namespace Kitchen.Api
             builder.RegisterGeneric(typeof(BaseRepositoryNHibernate<>)).As(typeof(IBaseRepository<>));
             builder.RegisterType<KitchenDbContext>().As<DbContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<FoodRepositoryNHibernate>().As<IFoodRepository>().InstancePerLifetimeScope();
-            builder.RegisterType<FoodService>().As<IFoodService>().InstancePerLifetimeScope();
+            builder.RegisterType<ExceptionLoggingFoodService>().As<IFoodService>().InstancePerLifetimeScope();
 
 
             MapperConfiguration config = AutoMapperConfig.Configure();
