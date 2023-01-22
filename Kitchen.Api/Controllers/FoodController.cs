@@ -24,7 +24,7 @@ namespace Kitchen.Api.Controllers
         public async  Task<IEnumerable<FoodDto>> GetAll()
         {
         
-            return await _foodService.GetAll(x=>x==x);
+            return await _foodService.GetAll(x=>true);
         }
         [HttpGet]
         public async Task<FoodDto> GetById(string id)

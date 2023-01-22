@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Abstraction.Data
 {
-   public interface IBaseRepository<TEntity>:IReadable<TEntity>,IDeletable<TEntity>,ICreateble<TEntity>
-        where TEntity:BaseEntity
-    {    
+   public interface IReadable<TEntity> where TEntity : BaseEntity
+    {
+        Task<TEntity> GetById(string id);
+        Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression);
     }
 }
