@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Abstraction.Data
 {
-   public interface ICreateble<TEntity> where TEntity : BaseEntity
+   public interface ICreatable<TEntity> where TEntity : BaseEntity
     {
         void Create(TEntity entity);
     }

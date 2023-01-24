@@ -11,7 +11,7 @@ namespace Kitchen.EF
 {
    public class FoodRepository : BaseRepositoryEF<Models.Food>, IFoodRepository
     {
-        public FoodRepository(KitchenDbContext dbContext) : base(dbContext)
+        public FoodRepository(KitchenDbContext dbContext) : base()
         {
         }
     }
