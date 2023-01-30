@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kitchen.Services.Dtos
+namespace Kitchen.Abstraction.Services
 {
-   public  class BaseDto
+    class DeleteService
     {
-        public string  Id { get; set; }
     }
 }

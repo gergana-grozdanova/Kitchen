@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Abstraction.Data
 {
-  public   interface IFoodRepository:IBaseRepository<Food>
+  public  interface IFoodRepository:IBaseRepository<Food>
     {
     }
 }

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kitchen.Abstraction.Data\Kitchen.Abstraction.Data.csproj" />
+    <ProjectReference Include="..\Kitchen.Models\Kitchen.Models.csproj" />
+  </ItemGroup>
+
+</Project>

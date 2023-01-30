@@ -13,39 +13,44 @@ namespace Kitchen.EF.Data.Repositories
     public class BaseRepositoryEF<TEntity> : IBaseRepository<TEntity>
          where TEntity : BaseEntity
     {
-        //TODO: fix thissss
-        private readonly IReadable<TEntity> _readRepo;
-        private readonly IDeletable<TEntity> _deleteRepo;
-        private readonly ICreatable<TEntity> _createRepo;
-        public BaseRepositoryEF(IReadable<TEntity> readRepo,IDeletable<TEntity> deleteRepo,ICreatable<TEntity> createRepo)
+        protected readonly KitchenDbContext _dbContext;
+        protected readonly DbSet<TEntity> entities;
+        public BaseRepositoryEF(KitchenDbContext dbContext)
         {
-            _readRepo = readRepo;
-            _deleteRepo = deleteRepo;
-            _createRepo = createRepo;
+            _dbContext = dbContext;
+            entities = dbContext.Set<TEntity>();
         }
         public void Create(TEntity entity)
         {
-            _createRepo.Create(entity);
+            entities.Add(entity);
         }
 
         public void Delete(string id)
         {
-            _deleteRepo.Delete(id);
+            TEntity entity = entities.FirstOrDefault(e => e.Id == id);
+            if (entity != null)
+            {
+                entities.Remove(entity);
+            }
         }
 
         public void Delete(TEntity entityToDelete)
         {
-            _deleteRepo.Delete(entityToDelete);
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                entities.Attach(entityToDelete);
+            }
+            entities.Remove(entityToDelete);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> expression)
         {
-            return await _readRepo.GetAll(expression);
+            return await entities.Where(expression).ToListAsync();
         }
 
         public async Task<TEntity> GetById(string id)
         {
-           return await _readRepo.GetById(id);
+            return await entities.FirstOrDefaultAsync(e => e.Id == id);
         }
     }
 }

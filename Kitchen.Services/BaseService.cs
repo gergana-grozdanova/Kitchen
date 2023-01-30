@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kitchen.Abstraction.Data;
+using Kitchen.Abstraction.Services;
 using Kitchen.Models;
 using Kitchen.Services.Abstraction;
 using Kitchen.Services.Dtos;
@@ -14,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Services
 {
-    public class BaseService<TEntity,TDto>:IBaseService<TEntity,TDto>
-        where TEntity:BaseEntity
-        where TDto:BaseDto
-        
+    public class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
+        where TEntity : BaseEntity
+        where TDto : BaseDto
+
     {
         protected readonly IBaseRepository<TEntity> _baseRepository;
         protected readonly IMapper _mapper;
@@ -41,8 +42,8 @@ namespace Kitchen.Services
             unitOfWork.Save();
         }
 
-      
-       
+
+
         public async Task<TDto> GetById(string id)
         {
             return _mapper.Map<TDto>(await _baseRepository.GetById(id));

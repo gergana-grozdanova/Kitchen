@@ -11,14 +11,19 @@ namespace Kitchen.EF.Data.Repositories
 {
     class BeverageRepository : IBeverageRepository
     {
-        public Task<IEnumerable<Beverage>> GetAll(Expression<Func<Beverage, bool>> expression)
+        protected readonly KitchenDbContext _dbContext;
+        public BeverageRepository(KitchenDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<IEnumerable<Beverage>> GetAll(Expression<Func<Beverage, bool>> expression)
+        {
+            return await Task.FromResult(_dbContext.Beverages);
         }
 
-        public Task<Beverage> GetById(string id)
+        public async Task<Beverage> GetById(string id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Beverages.FindAsync(id);
         }
     }
 }

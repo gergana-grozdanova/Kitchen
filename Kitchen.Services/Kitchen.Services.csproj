@@ -10,6 +10,7 @@
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Kitchen.Abstraction.Data\Kitchen.Abstraction.Data.csproj" />
+		<ProjectReference Include="..\Kitchen.Abstraction.Services\Kitchen.Abstraction.Services.csproj" />
 		<ProjectReference Include="..\Kitchen.Logging\Kitchen.Logging.csproj" />
 		<ProjectReference Include="..\Kitchen.Models\Kitchen.Models.csproj" />
 		<ProjectReference Include="..\Kitchen.UoW\Kitchen.UoW.csproj" />

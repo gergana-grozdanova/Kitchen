@@ -7,6 +7,7 @@ namespace Kitchen.EF.Data
     {
        
         public  DbSet<Food> Food { get; set; }
+        public DbSet<Beverage> Beverages { get; set; }
         public KitchenDbContext()
         {
 

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Kitchen.Abstraction.Data
 {
-   public interface IBaseRepository<TEntity>:IReadable<TEntity>,IDeletable<TEntity>,ICreatable<TEntity>
-        where TEntity:BaseEntity
-    {    
+    public interface IBaseRepository<TEntity> : IReadable<TEntity>, IDeletable<TEntity>, ICreatable<TEntity>
+         where TEntity : BaseEntity
+    {
     }
 }
